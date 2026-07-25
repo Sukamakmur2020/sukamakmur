@@ -24,7 +24,7 @@ export interface User {
 export interface VillageProfile {
   id: string;
   sejarah: string;
-  visi: string;
+  visi: string[];
   misi: string[];
   sambutan_kepdes: string;
   peta_url?: string;

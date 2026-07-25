@@ -13,7 +13,11 @@ async function main() {
     data: {
       sejarah:
         "Desa Suka Makmur berdiri sejak awal abad ke-19, bermula dari perkampungan agraris kecil di lembah hijau yang subur. Seiring berjalannya waktu, desa ini berkembang menjadi desa mandiri yang memadukan kearifan lokal dengan inovasi berkelanjutan, mempertahankan warisan budaya leluhur sambil terus beradaptasi dengan kemajuan teknologi.",
-      visi: "Menjadi Desa yang Mandiri, Sejahtera, dan Berbudaya melalui Tata Kelola Pemerintahan yang Inovatif dan Transparan.",
+      visi: [
+        "Menciptakan Desa Suka Makmur transparan dan menjadi Desa yang Maju.",
+        "Menciptakan Masyarakat yang Sejahtera.",
+        "Menciptakan Masyarakat Desa Suka Makmur Aman, Tertib dan Religius."
+      ],
       misi: [
         "Meningkatkan kualitas pelayanan publik berbasis teknologi informasi.",
         "Mendorong pertumbuhan ekonomi kerakyatan melalui pemberdayaan UMKM lokal.",

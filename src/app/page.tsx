@@ -197,9 +197,9 @@ export default async function Home() {
                  <ProfileImageStack />
               </div>
 
-              <div>
-                <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed line-clamp-4 text-center lg:text-left font-medium">
-                  {profile?.visi ? `"${profile.visi}"` : 'Profil Desa Suka Makmur belum tersedia.'}
+              <div className="w-full">
+                <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed text-center lg:text-left font-medium">
+                  &quot;Merealisasikan Desa Suka Makmur Sebagai Sentra dan Rengrus&quot;
                 </p>
               </div>
             </div>

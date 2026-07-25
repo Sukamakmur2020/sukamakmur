@@ -152,10 +152,17 @@ export default async function ProfilPage() {
                   <Target size={28} />
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4">Visi</h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed font-medium">
-                    &quot;{profile?.visi ?? "Visi desa akan ditampilkan setelah data profil tersedia."}&quot;
-                  </p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-6">Visi</h3>
+                  <ul className="space-y-4">
+                    {Array.isArray(profile?.visi) && profile.visi.length > 0 ? profile.visi.map((item: any, index: number) => (
+                      <li key={index} className="flex items-start gap-4">
+                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm mt-0.5">{index + 1}</span>
+                        <span className="text-slate-600 dark:text-slate-300 leading-relaxed pt-1">{item}</span>
+                      </li>
+                    )) : (
+                      <li className="text-slate-600 dark:text-slate-300">Visi belum tersedia.</li>
+                    )}
+                  </ul>
                 </div>
               </div>
 
@@ -169,12 +176,12 @@ export default async function ProfilPage() {
                 <div className="relative z-10">
                   <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-6">Misi</h3>
                   <ul className="space-y-4">
-                    {profile?.misi?.map((item: any, index: number) => (
-                      <li key={index} className="flex gap-4">
-                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center font-bold text-sm">{index + 1}</span>
+                    {Array.isArray(profile?.misi) && profile.misi.length > 0 ? profile.misi.map((item: any, index: number) => (
+                      <li key={index} className="flex items-start gap-4">
+                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 flex items-center justify-center font-bold text-sm mt-0.5">{index + 1}</span>
                         <span className="text-slate-600 dark:text-slate-300 leading-relaxed pt-1">{item}</span>
                       </li>
-                    )) ?? (
+                    )) : (
                       <li className="text-slate-600 dark:text-slate-300">Misi belum tersedia.</li>
                     )}
                   </ul>

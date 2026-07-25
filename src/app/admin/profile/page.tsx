@@ -11,11 +11,26 @@ export default function ProfileAdmin() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [profilUmum, setProfilUmum] = useState({
+  const [profilUmum, setProfilUmum] = useState<{
+    id: string;
+    sejarah: string;
+    visi: string[];
+    misi: string[];
+    sambutan_kepdes: string;
+    jumlah_penduduk: number | '';
+    laki_laki: number | '';
+    perempuan: number | '';
+    luas_wilayah: string;
+    batas_desa: string;
+    koordinat: string;
+    peta_url: string;
+    realisasi_dana_desa_persen: number | '';
+    umkm_aktif: number | '';
+  }>({
     id: '',
     sejarah: '',
-    visi: '',
-    misi: [] as string[],
+    visi: [],
+    misi: [],
     sambutan_kepdes: '',
     jumlah_penduduk: 0,
     laki_laki: 0,
@@ -63,7 +78,7 @@ export default function ProfileAdmin() {
         setProfilUmum({
           id: profile.id,
           sejarah: profile.sejarah || '',
-          visi: profile.visi || '',
+          visi: Array.isArray(profile.visi) ? profile.visi : (profile.visi ? [profile.visi] : []),
           misi: Array.isArray(profile.misi) ? profile.misi : [],
           sambutan_kepdes: profile.sambutan_kepdes || '',
           jumlah_penduduk: lakiLaki + perempuan || profile.jumlah_penduduk || 0,
@@ -104,13 +119,31 @@ export default function ProfileAdmin() {
     setProfilUmum({ ...profilUmum, misi: newMisi });
   };
 
+  const handleAddVisi = () => {
+    setProfilUmum({ ...profilUmum, visi: [...profilUmum.visi, ''] });
+  };
+
+  const handleRemoveVisi = (index: number) => {
+    const newVisi = [...profilUmum.visi];
+    newVisi.splice(index, 1);
+    setProfilUmum({ ...profilUmum, visi: newVisi });
+  };
+
+  const handleVisiChange = (index: number, value: string) => {
+    const newVisi = [...profilUmum.visi];
+    newVisi[index] = value;
+    setProfilUmum({ ...profilUmum, visi: newVisi });
+  };
+
   const handleSaveProfil = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       setSaving(true);
       setError(null);
 
-      const totalPenduduk = profilUmum.laki_laki + profilUmum.perempuan;
+      const lakiLaki = typeof profilUmum.laki_laki === 'number' ? profilUmum.laki_laki : 0;
+      const perempuan = typeof profilUmum.perempuan === 'number' ? profilUmum.perempuan : 0;
+      const totalPenduduk = lakiLaki + perempuan;
 
       // Simpan profile
       const profileResult = await profileAPI.update({
@@ -123,8 +156,8 @@ export default function ProfileAdmin() {
         koordinat: profilUmum.koordinat,
         peta_url: profilUmum.peta_url,
         jumlah_penduduk: totalPenduduk,
-        realisasi_dana_desa_persen: profilUmum.realisasi_dana_desa_persen,
-        umkm_aktif: profilUmum.umkm_aktif,
+        realisasi_dana_desa_persen: typeof profilUmum.realisasi_dana_desa_persen === 'number' ? profilUmum.realisasi_dana_desa_persen : 0,
+        umkm_aktif: typeof profilUmum.umkm_aktif === 'number' ? profilUmum.umkm_aktif : 0,
       });
 
       // Simpan data kependudukan (laki & perempuan) ke tabel penduduk_stat
@@ -132,8 +165,8 @@ export default function ProfileAdmin() {
       const pendudukPayload = {
         tahun: tahunIni,
         total_penduduk: totalPenduduk,
-        laki_laki: profilUmum.laki_laki,
-        perempuan: profilUmum.perempuan,
+        laki_laki: lakiLaki,
+        perempuan: perempuan,
         jumlah_kk: 0,
       };
       if (pendudukId) {
@@ -326,12 +359,33 @@ export default function ProfileAdmin() {
 
                 <div>
                   <label className="block text-sm font-medium mb-2">Visi</label>
-                  <textarea
-                    value={profilUmum.visi}
-                    onChange={(e) => setProfilUmum({ ...profilUmum, visi: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg h-24"
-                    placeholder="Masukkan visi desa..."
-                  />
+                  <div className="space-y-3">
+                    {profilUmum.visi.map((visiItem, index) => (
+                      <div key={index} className="flex gap-2">
+                        <input
+                          type="text"
+                          value={visiItem}
+                          onChange={(e) => handleVisiChange(index, e.target.value)}
+                          className="flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                          placeholder={`Visi ${index + 1}`}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveVisi(index)}
+                          className="p-2 bg-red-50 text-red-600 rounded-lg border border-red-100 hover:bg-red-100 transition-colors"
+                        >
+                          <X size={20} />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={handleAddVisi}
+                      className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 flex items-center gap-2 text-sm font-medium transition-colors"
+                    >
+                      <Plus size={16} /> Tambah Visi
+                    </button>
+                  </div>
                 </div>
 
                 <div>
@@ -383,8 +437,9 @@ export default function ProfileAdmin() {
                     min="0"
                     value={profilUmum.laki_laki}
                     onChange={(e) => {
-                      const val = parseInt(e.target.value) || 0;
-                      setProfilUmum({ ...profilUmum, laki_laki: val, jumlah_penduduk: val + profilUmum.perempuan });
+                      const val = e.target.value === '' ? '' : parseInt(e.target.value) || 0;
+                      const perempuan = typeof profilUmum.perempuan === 'number' ? profilUmum.perempuan : 0;
+                      setProfilUmum({ ...profilUmum, laki_laki: val, jumlah_penduduk: (typeof val === 'number' ? val : 0) + perempuan });
                     }}
                     className="w-full px-3 py-2 border-2 border-cyan-200 bg-cyan-50 rounded-lg font-semibold text-cyan-900 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   />
@@ -401,8 +456,9 @@ export default function ProfileAdmin() {
                     min="0"
                     value={profilUmum.perempuan}
                     onChange={(e) => {
-                      const val = parseInt(e.target.value) || 0;
-                      setProfilUmum({ ...profilUmum, perempuan: val, jumlah_penduduk: profilUmum.laki_laki + val });
+                      const val = e.target.value === '' ? '' : parseInt(e.target.value) || 0;
+                      const lakiLaki = typeof profilUmum.laki_laki === 'number' ? profilUmum.laki_laki : 0;
+                      setProfilUmum({ ...profilUmum, perempuan: val, jumlah_penduduk: lakiLaki + (typeof val === 'number' ? val : 0) });
                     }}
                     className="w-full px-3 py-2 border-2 border-pink-200 bg-pink-50 rounded-lg font-semibold text-pink-900 focus:outline-none focus:ring-2 focus:ring-pink-400"
                   />
@@ -416,7 +472,7 @@ export default function ProfileAdmin() {
                   </label>
                   <input
                     type="number"
-                    value={profilUmum.laki_laki + profilUmum.perempuan}
+                    value={(typeof profilUmum.laki_laki === 'number' ? profilUmum.laki_laki : 0) + (typeof profilUmum.perempuan === 'number' ? profilUmum.perempuan : 0)}
                     readOnly
                     className="w-full px-3 py-2 border-2 border-blue-200 bg-blue-50 rounded-lg font-black text-blue-800 cursor-not-allowed opacity-80"
                   />
@@ -432,7 +488,7 @@ export default function ProfileAdmin() {
                       max="100"
                       value={profilUmum.realisasi_dana_desa_persen}
                       onChange={(e) =>
-                        setProfilUmum({ ...profilUmum, realisasi_dana_desa_persen: parseInt(e.target.value) || 0 })
+                        setProfilUmum({ ...profilUmum, realisasi_dana_desa_persen: e.target.value === '' ? '' : parseInt(e.target.value) || 0 })
                       }
                       className="flex-1 px-3 py-2 border rounded-lg"
                     />
@@ -447,7 +503,7 @@ export default function ProfileAdmin() {
                     type="number"
                     value={profilUmum.umkm_aktif}
                     onChange={(e) =>
-                      setProfilUmum({ ...profilUmum, umkm_aktif: parseInt(e.target.value) || 0 })
+                      setProfilUmum({ ...profilUmum, umkm_aktif: e.target.value === '' ? '' : parseInt(e.target.value) || 0 })
                     }
                     className="w-full px-3 py-2 border rounded-lg"
                   />

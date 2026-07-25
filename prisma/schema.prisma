@@ -11,7 +11,7 @@ datasource db {
 model VillageProfile {
   id                         String   @id @default(uuid())
   sejarah                    String
-  visi                       String
+  visi                       String[]
   misi                       String[]
   sambutan_kepdes            String
   peta_url                   String?

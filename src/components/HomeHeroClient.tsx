@@ -87,7 +87,7 @@ export default function HomeHeroClient() {
               </div>
               <div>
                 <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed line-clamp-4 text-center lg:text-left font-medium">
-                  {profile?.visi ? `"${profile.visi}"` : 'Profil desa belum tersedia.'}
+                  {Array.isArray(profile?.visi) && profile.visi.length > 0 ? `"${profile.visi.join(' ')}"` : (typeof profile?.visi === 'string' && profile.visi ? `"${profile.visi}"` : 'Profil desa belum tersedia.')}
                 </p>
               </div>
             </div>

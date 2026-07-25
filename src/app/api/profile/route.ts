@@ -26,10 +26,20 @@ export async function GET() {
         } catch (e) {
           // keep original
         }
+
+        let visiVal: any = row.visi;
+        try {
+          if (typeof visiVal === 'string') {
+            const parsed = JSON.parse(visiVal);
+            if (Array.isArray(parsed)) visiVal = parsed;
+          }
+        } catch (e) {
+          // keep original
+        }
         profile = {
           id: row.id,
           sejarah: row.sejarah,
-          visi: row.visi,
+          visi: Array.isArray(visiVal) ? visiVal : (visiVal ? [String(visiVal)] : []),
           misi: Array.isArray(misiVal) ? misiVal : [],
           sambutan_kepdes: row.sambutan_kepdes,
           peta_url: row.peta_url,
@@ -101,18 +111,7 @@ async function getSafeVillageProfileColumns() {
 }
 
 async function findExistingVillageProfile(allowedColumns: Set<string>) {
-  const selected = Array.from(allowedColumns).reduce((acc: Record<string, true>, column) => {
-    if (profilePrismaColumns.has(column)) {
-      acc[column] = true;
-    }
-    return acc;
-  }, {});
-
-  if (Object.keys(selected).length === 0) {
-    return null;
-  }
-
-  return prisma.villageProfile.findFirst({ select: selected as any });
+  return prisma.villageProfile.findFirst({ select: { id: true } });
 }
 
 function buildSqlUpdateSet(data: Record<string, any>) {
@@ -150,7 +149,13 @@ export async function PUT(req: NextRequest) {
     const data: any = {};
 
     if (typeof body.sejarah === 'string') data.sejarah = body.sejarah;
-    if (typeof body.visi === 'string') data.visi = body.visi;
+
+    // visi: accept array of strings; coerce or default to empty array
+    if (Array.isArray(body.visi)) {
+      data.visi = body.visi.map((v: any) => (v == null ? '' : String(v)));
+    } else if (typeof body.visi === 'string') {
+      data.visi = [body.visi];
+    }
 
     // misi: accept array of strings; coerce or default to empty array
     if (Array.isArray(body.misi)) {
@@ -208,7 +213,7 @@ export async function PUT(req: NextRequest) {
       // when creating, ensure required fields exist or provide defaults
       const createData = {
         sejarah: data.sejarah ?? '',
-        visi: data.visi ?? '',
+        visi: data.visi ?? [],
         misi: data.misi ?? [],
         sambutan_kepdes: data.sambutan_kepdes ?? '',
         peta_url: data.peta_url,

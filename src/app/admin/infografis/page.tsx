@@ -186,11 +186,11 @@ export default function AdminInfografisPage() {
                   <input 
                     type="number"
                     min="0"
-                    value={penduduk?.laki_laki || 0}
+                    value={penduduk?.laki_laki ?? ''}
                     onChange={(e) => {
-                      const val = Number(e.target.value);
-                      const perempuan = penduduk?.perempuan || 0;
-                      setPenduduk({...penduduk, laki_laki: val, total_penduduk: val + perempuan});
+                      const val = e.target.value === '' ? '' : Number(e.target.value);
+                      const perempuan = typeof penduduk?.perempuan === 'number' ? penduduk.perempuan : 0;
+                      setPenduduk({...penduduk, laki_laki: val, total_penduduk: (typeof val === 'number' ? val : 0) + perempuan});
                     }}
                     disabled={saving}
                     className="w-full px-4 py-3 rounded-xl border-2 border-cyan-200 dark:border-cyan-800 bg-cyan-50 dark:bg-cyan-900/20 focus:ring-2 focus:ring-cyan-400 outline-none font-bold text-cyan-900 dark:text-cyan-100 disabled:opacity-50" 
@@ -205,11 +205,11 @@ export default function AdminInfografisPage() {
                   <input 
                     type="number"
                     min="0"
-                    value={penduduk?.perempuan || 0}
+                    value={penduduk?.perempuan ?? ''}
                     onChange={(e) => {
-                      const val = Number(e.target.value);
-                      const lakiLaki = penduduk?.laki_laki || 0;
-                      setPenduduk({...penduduk, perempuan: val, total_penduduk: lakiLaki + val});
+                      const val = e.target.value === '' ? '' : Number(e.target.value);
+                      const lakiLaki = typeof penduduk?.laki_laki === 'number' ? penduduk.laki_laki : 0;
+                      setPenduduk({...penduduk, perempuan: val, total_penduduk: lakiLaki + (typeof val === 'number' ? val : 0)});
                     }}
                     disabled={saving}
                     className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 dark:border-pink-800 bg-pink-50 dark:bg-pink-900/20 focus:ring-2 focus:ring-pink-400 outline-none font-bold text-pink-900 dark:text-pink-100 disabled:opacity-50" 
@@ -223,7 +223,7 @@ export default function AdminInfografisPage() {
                   </label>
                   <input 
                     type="number"
-                    value={(penduduk?.laki_laki || 0) + (penduduk?.perempuan || 0)}
+                    value={(typeof penduduk?.laki_laki === 'number' ? penduduk.laki_laki : 0) + (typeof penduduk?.perempuan === 'number' ? penduduk.perempuan : 0)}
                     readOnly
                     className="w-full px-4 py-3 rounded-xl border-2 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-slate-800 outline-none font-black text-blue-800 dark:text-blue-300 cursor-not-allowed opacity-80" 
                   />
@@ -237,8 +237,8 @@ export default function AdminInfografisPage() {
                   <input 
                     type="number"
                     min="0"
-                    value={penduduk?.jumlah_kk || 0}
-                    onChange={(e) => setPenduduk({...penduduk, jumlah_kk: Number(e.target.value)})}
+                    value={penduduk?.jumlah_kk ?? ''}
+                    onChange={(e) => setPenduduk({...penduduk, jumlah_kk: e.target.value === '' ? '' : Number(e.target.value)})}
                     disabled={saving}
                     className="w-full px-4 py-3 rounded-xl border-2 border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 focus:ring-2 focus:ring-amber-400 outline-none font-bold text-amber-900 dark:text-amber-100 disabled:opacity-50" 
                   />
@@ -271,8 +271,8 @@ export default function AdminInfografisPage() {
                     <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Jumlah (Rp)</label>
                     <input 
                       type="number" 
-                      value={apbdes?.pendapatan || 0}
-                      onChange={(e) => setApbdes({...apbdes, pendapatan: Number(e.target.value)})}
+                      value={apbdes?.pendapatan ?? ''}
+                      onChange={(e) => setApbdes({...apbdes, pendapatan: e.target.value === '' ? '' : Number(e.target.value)})}
                       disabled={saving}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:ring-2 focus:ring-emerald-500/50 outline-none font-mono disabled:opacity-50" 
                     />
@@ -291,8 +291,8 @@ export default function AdminInfografisPage() {
                     <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Jumlah (Rp)</label>
                     <input 
                       type="number" 
-                      value={apbdes?.belanja || 0}
-                      onChange={(e) => setApbdes({...apbdes, belanja: Number(e.target.value)})}
+                      value={apbdes?.belanja ?? ''}
+                      onChange={(e) => setApbdes({...apbdes, belanja: e.target.value === '' ? '' : Number(e.target.value)})}
                       disabled={saving}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:ring-2 focus:ring-rose-500/50 outline-none font-mono disabled:opacity-50" 
                     />
@@ -311,8 +311,8 @@ export default function AdminInfografisPage() {
                     <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Jumlah (Rp)</label>
                     <input 
                       type="number" 
-                      value={apbdes?.lebih_kurang || 0}
-                      onChange={(e) => setApbdes({...apbdes, lebih_kurang: Number(e.target.value)})}
+                      value={apbdes?.lebih_kurang ?? ''}
+                      onChange={(e) => setApbdes({...apbdes, lebih_kurang: e.target.value === '' ? '' : Number(e.target.value)})}
                       disabled={saving}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:ring-2 focus:ring-blue-500/50 outline-none font-mono disabled:opacity-50" 
                     />

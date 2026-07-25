@@ -18,7 +18,9 @@ import {
 export const mockVillageProfile: VillageProfile = {
   id: 'vp-001',
   sejarah: 'Desa Suka Makmur berdiri sejak awal abad ke-19, bermula dari perkampungan agraris kecil di lembah hijau. Seiring berjalannya waktu, Suka Makmur berkembang menjadi desa mandiri yang memadukan kearifan lokal dengan inovasi berkelanjutan, mempertahankan warisan budaya leluhur sambil terus beradaptasi dengan kemajuan teknologi.',
-  visi: 'Menjadi Desa yang Mandiri, Sejahtera, dan Berbudaya melalui Tata Kelola Pemerintahan yang Inovatif dan Transparan.',
+  visi: [
+    'Menjadi Desa yang Mandiri, Sejahtera, dan Berbudaya melalui Tata Kelola Pemerintahan yang Inovatif dan Transparan.'
+  ],
   misi: [
     'Meningkatkan kualitas pelayanan publik berbasis teknologi informasi.',
     'Mendorong pertumbuhan ekonomi kerakyatan melalui pemberdayaan UMKM lokal.',

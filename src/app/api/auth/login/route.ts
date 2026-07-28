@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+import bcrypt from 'bcryptjs';
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { email, password } = body;
 
-    // Simple hardcoded credentials for admin authentication
-    // In production, this should check against a database with hashed passwords
-    const ADMIN_EMAIL = 'admin@sukamakmur.desa.id';
-    const ADMIN_PASSWORD = 'password123';
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    if (user && bcrypt.compareSync(password, user.password)) {
       const response = NextResponse.json(
         { success: true, message: 'Login berhasil' },
         { status: 200 }

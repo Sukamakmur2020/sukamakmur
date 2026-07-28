@@ -89,6 +89,7 @@ export const profileAPI = {
   updateStruktur: (id: string, data: any) =>
     apiCall("PUT", `/api/profile/struktur/${id}`, data),
   deleteStruktur: (id: string) => apiCall("DELETE", `/api/profile/struktur/${id}`),
+  setKepalaDesa: (id: string) => apiCall("POST", "/api/profile/struktur/set-kepala", { id }),
 };
 
 // Infografis API

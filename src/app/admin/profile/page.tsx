@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Save, Plus, Trash2, Edit, X, Upload } from 'lucide-react';
+import { Save, Plus, Trash2, Edit, X, Upload, Star } from 'lucide-react';
 import { profileAPI, infografisAPI } from '@/lib/api';
 import { RichTextEditor } from '@/components/ui/RichTextEditor';
 
@@ -304,6 +304,33 @@ export default function ProfileAdmin() {
     }
   };
 
+  const handleSetKepalaDesa = async (id: string) => {
+    if (!confirm('Jadikan aparatur ini sebagai Kepala Desa (ditampilkan di halaman utama)?')) return;
+
+    try {
+      setSaving(true);
+      setError(null);
+
+      const result = await profileAPI.setKepalaDesa(id);
+
+      if (result.success) {
+        // Refresh list
+        const strukturRes = await profileAPI.getStruktur();
+        if (strukturRes.success && Array.isArray(strukturRes.data)) {
+          setAparaturList(strukturRes.data);
+        }
+        alert('✓ Berhasil mengatur Kepala Desa!');
+      } else {
+        setError(result.error || 'Gagal mengatur Kepala Desa');
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      setError(message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-1">
@@ -556,7 +583,21 @@ export default function ProfileAdmin() {
                           <span className="text-gray-400">-</span>
                         )}
                       </td>
-                      <td className="px-6 py-3 flex gap-2">
+                      <td className="px-6 py-3 flex gap-2 flex-wrap">
+                        {item.urutan === 1 ? (
+                          <span className="px-3 py-1 bg-amber-100 text-amber-700 rounded flex items-center gap-1 text-sm border border-amber-200" title="Kepala Desa Saat Ini">
+                            <Star size={14} className="fill-amber-500 text-amber-500" />
+                            Kepala Desa
+                          </span>
+                        ) : (
+                          <button
+                            onClick={() => handleSetKepalaDesa(item.id)}
+                            className="px-3 py-1 bg-slate-100 text-slate-600 hover:text-amber-600 hover:bg-amber-50 rounded flex items-center gap-1 transition-colors"
+                            title="Jadikan Kepala Desa"
+                          >
+                            <Star size={16} />
+                          </button>
+                        )}
                         <button
                           onClick={() => handleModalOpen(item)}
                           className="px-3 py-1 bg-blue-100 text-blue-700 rounded flex items-center gap-1"

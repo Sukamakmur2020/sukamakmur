@@ -96,7 +96,7 @@ export default function KatalogMap({ items }: { items: KatalogItem[] }) {
               )}
               <Link 
                 href={`/katalog/${item.slug}`}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-white bg-primary px-3 py-1.5 rounded-full hover:bg-primary/90 transition-colors no-underline"
+                className="inline-flex items-center gap-1 text-xs font-semibold !text-white bg-primary px-3 py-1.5 rounded-full hover:bg-primary/90 transition-colors no-underline"
               >
                 Lihat Detail <ArrowRight size={12} />
               </Link>

@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Lock } from 'lucide-react';
+import { Lock, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('admin@sukamakmur.desa.id');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -54,7 +55,7 @@ export default function LoginPage() {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Login Admin Desa</h1>
           <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Silakan masuk dengan akun yang terdaftar untuk mengelola portal desa.</p>
         </div>
-        
+
         {error && (
           <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400 relative z-10">
             {error}
@@ -63,41 +64,50 @@ export default function LoginPage() {
 
         <form className="space-y-5 relative z-10" onSubmit={handleSubmit}>
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Email</label>
-            <input 
-              type="email" 
+            <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Username</label>
+            <input
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-slate-900 dark:text-white font-medium" 
-              required 
+              className="w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-slate-900 dark:text-white font-medium"
+              required
             />
           </div>
-          
+
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Password</label>
             </div>
-            <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-slate-900 dark:text-white font-medium tracking-widest" 
-              required 
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-slate-900 dark:text-white font-medium pr-12 ${!showPassword && password ? 'tracking-widest' : ''}`}
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors focus:outline-none"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
-          
+
           <div className="pt-4">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={loading}
-              className="w-full py-4 px-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 transform-gpu hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" 
+              className="w-full py-4 px-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 transform-gpu hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Lock size={18} />
               {loading ? 'Sedang login...' : 'Masuk ke CMS'}
             </button>
           </div>
         </form>
-        
+
         <div className="text-center text-sm font-medium text-slate-500 pt-4 border-t border-slate-100 dark:border-slate-800 relative z-10">
           <Link href="/" className="hover:text-primary transition-colors flex items-center justify-center gap-2">
             &larr; Kembali ke Beranda

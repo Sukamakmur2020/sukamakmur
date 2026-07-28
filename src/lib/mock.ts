@@ -32,7 +32,7 @@ export const mockVillageProfile: VillageProfile = {
   peta_url: 'https://maps.google.com/...',
   koordinat: '-6.200000, 106.816666',
   batas_desa: 'Utara: Desa Beringin Jaya, Selatan: Sungai Suka Makmur, Timur: Hutan Lindung, Barat: Kecamatan Beringin.',
-  luas_wilayah: '450 Hektar',
+  luas_wilayah: '161 Hektar',
   jumlah_penduduk: 2450
 };
 

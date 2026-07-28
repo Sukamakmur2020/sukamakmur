@@ -228,10 +228,10 @@ export default function ProfilPageClient() {
                   </div>
                 </div>
                 <div className="mt-6 text-sm text-slate-700 dark:text-slate-300">
-                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Utara</span><span>Medan Johor</span></div>
-                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Timur</span><span>Mekar Sari</span></div>
-                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Selatan</span><span>Kedai Durian, Namorambe</span></div>
-                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Barat</span><span>Medan Johor</span></div>
+                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Utara</span><span>Desa Kedai Durian</span></div>
+                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Timur</span><span>Desa Marindal 1</span></div>
+                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Selatan</span><span>Desa Kedai Durian</span></div>
+                  <div className="flex justify-between py-1"><span className="font-bold text-xs text-slate-400 w-24 uppercase">Barat</span><span>Desa Deli Tua</span></div>
                 </div>
               </div>
 
@@ -240,7 +240,7 @@ export default function ProfilPageClient() {
                   <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center"><Map size={20} /></div>
                   <div className="text-sm text-slate-500">Luas Wilayah</div>
                 </div>
-                <div className="mt-4 text-4xl md:text-5xl font-black text-slate-900 dark:text-white">{profile.luas_wilayah ?? '450'}<span className="text-lg font-medium text-slate-400"> Hektar</span></div>
+                <div className="mt-4 text-4xl md:text-5xl font-black text-slate-900 dark:text-white">{profile.luas_wilayah ?? '161'}<span className="text-lg font-medium text-slate-400"> Hektar</span></div>
               </div>
 
               <div className="flex flex-col items-center md:items-end md:pl-6">

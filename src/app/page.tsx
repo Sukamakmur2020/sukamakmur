@@ -465,7 +465,7 @@ export default async function Home() {
                             <span>{new Date(doc.published_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
                           </td>
                           <td className="md:py-4 md:px-6 flex justify-end md:table-cell pt-4 text-right">
-                            <a href={doc.file_url} className="inline-flex w-full md:w-auto justify-center items-center gap-2 px-4 py-2.5 md:py-2 rounded-xl md:rounded-lg bg-primary/10 text-primary md:bg-slate-100 md:dark:bg-slate-800 md:text-slate-700 md:dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-colors text-sm font-semibold">
+                            <a href={`/api/download?url=${encodeURIComponent(doc.file_url)}&name=${encodeURIComponent(doc.judul)}`} className="inline-flex w-full md:w-auto justify-center items-center gap-2 px-4 py-2.5 md:py-2 rounded-xl md:rounded-lg bg-primary/10 text-primary md:bg-slate-100 md:dark:bg-slate-800 md:text-slate-700 md:dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-colors text-sm font-semibold">
                               <Download size={16} />
                               <span>Unduh Dokumen</span>
                             </a>

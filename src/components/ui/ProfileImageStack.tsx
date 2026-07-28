@@ -8,15 +8,15 @@ export function ProfileImageStack() {
 
   const images = [
     {
-      src: "/mock-data/news-gotong-royong.jpg",
+      src: "/data/img1.jpg",
       baseClass: "-rotate-6 -translate-x-20 sm:-translate-x-32",
     },
     {
-      src: "/mock-data/news-musrenbang.jpg",
+      src: "/data/img2.jpg",
       baseClass: "rotate-6 translate-x-20 sm:translate-x-32",
     },
     {
-      src: "/mock-data/village-profile.jpg",
+      src: "/data/img3.jpg",
       baseClass: "rotate-0",
     }
   ];

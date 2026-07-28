@@ -19,11 +19,10 @@ const createDirectionIcon = (arrow: string, label: string) => {
   });
 };
 
-const northIcon = createDirectionIcon("↑", "Utara: Medan Johor");
-const eastIcon = createDirectionIcon("→", "Timur: Mekar Sari");
-const southIcon = createDirectionIcon("↓", "Selatan: Kedai Durian");
-const southWestIcon = createDirectionIcon("↙", "Barat Daya: Namorambe");
-const westIcon = createDirectionIcon("←", "Barat: Medan Johor");
+const northIcon = createDirectionIcon("↑", "Utara: Desa Kedai Durian");
+const eastIcon = createDirectionIcon("→", "Timur: Desa Marindal 1");
+const southIcon = createDirectionIcon("↓", "Selatan: Desa Kedai Durian");
+const westIcon = createDirectionIcon("←", "Barat: Desa Deli Tua");
 
 export default function ProfileMap() {
   const defaultCenter: [number, number] = [3.514, 98.678]; // Center on Sukamakmur/Suka Makmur
@@ -41,11 +40,10 @@ export default function ProfileMap() {
       />
       
       {/* Directional Labels */}
-      <Marker position={[3.521, 98.678]} icon={northIcon} interactive={false} />
-      <Marker position={[3.509, 98.685]} icon={southIcon} interactive={false} />
-      <Marker position={[3.510, 98.676]} icon={southWestIcon} interactive={false} />
-      <Marker position={[3.514, 98.692]} icon={eastIcon} interactive={false} />
-      <Marker position={[3.515, 98.668]} icon={westIcon} interactive={false} />
+      <Marker position={[3.519, 98.682]} icon={northIcon} interactive={false} />
+      <Marker position={[3.511, 98.685]} icon={southIcon} interactive={false} />
+      <Marker position={[3.514, 98.691]} icon={eastIcon} interactive={false} />
+      <Marker position={[3.514, 98.676]} icon={westIcon} interactive={false} />
 
       {/* Village Borders and POIs */}
       <VillageGeoJSON />

@@ -229,15 +229,7 @@ export default async function ProfilPage() {
 
               <div className="relative w-full h-[420px] md:h-[520px] lg:h-[620px] rounded-[36px] overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800">
                 <ProfileMapWrapper />
-                <div className="absolute inset-x-0 top-6 flex justify-center px-4">
-                  <div className="inline-flex items-center gap-3 rounded-full bg-white/95 dark:bg-slate-950/95 border border-slate-200 dark:border-slate-800 px-5 py-3 shadow-lg backdrop-blur-sm">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                      <MapPin size={18} />
-                    </div>
-                    <div className="text-sm text-slate-800 dark:text-white font-semibold">Batas Administrasi Desa</div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400">Legenda dusun paling atas</div>
-                  </div>
-                </div>
+
               </div>
 
               <div className="max-w-6xl mx-auto space-y-4">
@@ -292,19 +284,19 @@ export default async function ProfilPage() {
                     <div className="mt-8 divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-300">
                       <div className="flex items-start gap-4 py-4">
                         <span className="w-20 text-xs uppercase font-semibold text-slate-400">Utara</span>
-                        <span className="text-sm font-medium">Medan Johor</span>
+                        <span className="text-sm font-medium">Desa Kedai Durian</span>
                       </div>
                       <div className="flex items-start gap-4 py-4">
                         <span className="w-20 text-xs uppercase font-semibold text-slate-400">Timur</span>
-                        <span className="text-sm font-medium">Mekar Sari</span>
+                        <span className="text-sm font-medium">Desa Marindal 1</span>
                       </div>
                       <div className="flex items-start gap-4 py-4">
                         <span className="w-20 text-xs uppercase font-semibold text-slate-400">Selatan</span>
-                        <span className="text-sm font-medium">Kedai Durian, Namorambe</span>
+                        <span className="text-sm font-medium">Desa Kedai Durian</span>
                       </div>
                       <div className="flex items-start gap-4 py-4">
                         <span className="w-20 text-xs uppercase font-semibold text-slate-400">Barat</span>
-                        <span className="text-sm font-medium">Medan Johor</span>
+                        <span className="text-sm font-medium">Desa Deli Tua</span>
                       </div>
                     </div>
                   </div>
@@ -314,7 +306,7 @@ export default async function ProfilPage() {
                       <Map size={24} />
                     </div>
                     <p className="text-sm text-slate-500 mb-2">Luas Wilayah</p>
-                    <p className="text-5xl font-black text-slate-900 dark:text-white">{profile?.luas_wilayah ? profile.luas_wilayah : '450'}</p>
+                    <p className="text-5xl font-black text-slate-900 dark:text-white">{profile?.luas_wilayah ? profile.luas_wilayah : '161'}</p>
                     <p className="text-base font-semibold text-slate-500 dark:text-slate-400">Hektar</p>
                   </div>
 

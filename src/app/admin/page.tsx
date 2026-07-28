@@ -2,6 +2,7 @@ import React from 'react';
 import { Users, Map, Newspaper, FileText, TrendingUp, AlertCircle, Inbox } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
+import RefreshButton from '@/components/admin/RefreshButton';
 
 export default async function AdminDashboard() {
   const [newsCount, katalogCount, ppidCount, pengaduanCount] = await Promise.all([
@@ -19,6 +20,25 @@ export default async function AdminDashboard() {
     { name: 'Katalog UMKM/Wisata', value: katalogCount.toString(), icon: Map, color: 'text-emerald-600 bg-emerald-100 dark:text-emerald-400 dark:bg-emerald-900/30', href: '/admin/katalog' },
     { name: 'Dokumen PPID', value: ppidCount.toString(), icon: FileText, color: 'text-amber-600 bg-amber-100 dark:text-amber-400 dark:bg-amber-900/30', href: '/admin/ppid' },
   ];
+
+  // Dynamic Health Checks
+  let dbStatus = { label: 'Error', ok: false };
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    dbStatus = { label: 'Terhubung', ok: true };
+  } catch (error) {
+    dbStatus = { label: 'Error', ok: false };
+  }
+
+  const vercelHostStatus = { 
+    label: process.env.VERCEL ? 'Aktif (Vercel)' : 'Aktif (Local)', 
+    ok: true 
+  };
+  
+  const blobStorageStatus = { 
+    label: process.env.BLOB_READ_WRITE_TOKEN ? 'Aktif' : 'Tidak Dikonfigurasi', 
+    ok: !!process.env.BLOB_READ_WRITE_TOKEN 
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -72,22 +92,31 @@ export default async function AdminDashboard() {
 
         {/* System Status */}
         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-          <div className="flex items-center gap-2 text-slate-800 dark:text-white font-bold text-lg border-b border-slate-100 dark:border-slate-800 pb-4">
-            <AlertCircle className="text-slate-400" />
-            Status Sistem
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+            <div className="flex items-center gap-2 text-slate-800 dark:text-white font-bold text-lg">
+              <AlertCircle className="text-slate-400" />
+              Status Sistem
+            </div>
+            <RefreshButton />
           </div>
           <div className="space-y-4">
             <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+              <span className="font-medium text-slate-600 dark:text-slate-300">Vercel Host</span>
+              <span className={`px-2.5 py-1 text-xs font-bold rounded-full ${vercelHostStatus.ok ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
+                {vercelHostStatus.label}
+              </span>
+            </div>
+            <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+              <span className="font-medium text-slate-600 dark:text-slate-300">Blob Storage</span>
+              <span className={`px-2.5 py-1 text-xs font-bold rounded-full ${blobStorageStatus.ok ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'}`}>
+                {blobStorageStatus.label}
+              </span>
+            </div>
+            <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
               <span className="font-medium text-slate-600 dark:text-slate-300">Database Connection</span>
-              <span className="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Terhubung</span>
-            </div>
-            <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-              <span className="font-medium text-slate-600 dark:text-slate-300">Vercel Blob Storage</span>
-              <span className="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Aktif</span>
-            </div>
-            <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-              <span className="font-medium text-slate-600 dark:text-slate-300">Sistem Keamanan</span>
-              <span className="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Optimal</span>
+              <span className={`px-2.5 py-1 text-xs font-bold rounded-full ${dbStatus.ok ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
+                {dbStatus.label}
+              </span>
             </div>
           </div>
         </div>

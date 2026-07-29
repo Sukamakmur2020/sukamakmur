@@ -42,3 +42,11 @@ next-env.d.ts
 
 /src/generated/prisma
 *.db
+
+# admin user guide
+ADMIN_USER_GUIDE.md
+admin_user_guide_client.md
+generate_pdf_guide.js
+generate_docx.js
+Panduan_Pengguna_Admin.docx
+Panduan_Pengguna_Admin.pdf

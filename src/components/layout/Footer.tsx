@@ -209,7 +209,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-800 text-sm flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500">
-          <p>© 2026 Powered by KKN Universitas Negeri Medan Kelompok 1</p>
+          <p>© 2026 Powered by KKN Universitas Negeri Medan Kelompok</p>
           <p>Desa Suka Makmur, Berkarya & Berinovasi</p>
         </div>
       </div>

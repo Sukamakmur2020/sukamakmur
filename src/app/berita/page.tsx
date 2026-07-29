@@ -4,6 +4,8 @@ import { ArrowRight, Calendar, Newspaper } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { stripHtml } from "@/lib/utils";
 
+export const dynamic = 'force-dynamic';
+
 export default async function BeritaPage() {
   const berita = await prisma.news.findMany({
     where: { status: "PUBLISHED" },

@@ -5,6 +5,8 @@ import { prisma } from "@/lib/prisma";
 import { stripHtml } from "@/lib/utils";
 import { ProfileImageStack } from "@/components/ui/ProfileImageStack";
 
+export const dynamic = 'force-dynamic';
+
 async function getSafeVillageProfile() {
   try {
     return await prisma.villageProfile.findFirst();

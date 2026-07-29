@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { LayoutDashboard, Users, Map, FileText, Newspaper, Building2, Inbox } from 'lucide-react';
 import AdminLogout from '@/components/admin/AdminLogout';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen w-full bg-slate-50 dark:bg-slate-950 overflow-hidden font-sans">

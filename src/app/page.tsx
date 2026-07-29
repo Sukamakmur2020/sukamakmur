@@ -364,7 +364,7 @@ export default async function Home() {
                     {latestNews.judul}
                   </h4>
                   <p className="text-slate-300 line-clamp-2">
-                    {latestNews.konten.replace(/<[^>]+>/g, '').slice(0, 200)}
+                    {stripHtml(latestNews.konten).slice(0, 200)}
                   </p>
                 </div>
               </Link>

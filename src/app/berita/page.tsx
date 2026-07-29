@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, Newspaper } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { stripHtml } from "@/lib/utils";
 
 export default async function BeritaPage() {
   const berita = await prisma.news.findMany({
@@ -75,7 +76,7 @@ export default async function BeritaPage() {
                   {featuredNews.judul}
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-4">
-                  {featuredNews.konten.replace(/<[^>]+>/g, '')}
+                  {stripHtml(featuredNews.konten)}
                 </p>
                 <div className="inline-flex items-center gap-2 text-primary font-bold text-sm pt-2">
                   <span>Baca Selengkapnya</span>
@@ -124,7 +125,7 @@ export default async function BeritaPage() {
                         {berita.judul}
                       </h4>
                       <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3">
-                        {berita.konten.replace(/<[^>]+>/g, '')}
+                        {stripHtml(berita.konten)}
                       </p>
                       <div className="inline-flex items-center gap-1.5 text-primary font-bold text-xs mt-auto pt-4">
                         <span>Baca Berita</span>
@@ -180,7 +181,7 @@ export default async function BeritaPage() {
                       {berita.judul}
                     </h4>
                     <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3">
-                      {berita.konten.replace(/<[^>]+>/g, '')}
+                      {stripHtml(berita.konten)}
                     </p>
                     <div className="inline-flex items-center gap-1.5 text-primary font-bold text-xs mt-auto pt-4">
                       <span>Baca Berita</span>

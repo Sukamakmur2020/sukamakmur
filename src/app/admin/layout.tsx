@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { LayoutDashboard, Users, Map, FileText, Newspaper, Building2, Inbox } from 'lucide-react';
+import { LayoutDashboard, Users, Map, FileText, Newspaper, Building2, Inbox, Settings } from 'lucide-react';
 import AdminLogout from '@/components/admin/AdminLogout';
 
 export const dynamic = 'force-dynamic';
@@ -45,6 +45,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin/ppid" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors font-medium">
             <FileText size={18} />
             PPID
+          </Link>
+          <Link href="/admin/pengaturan" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors font-medium">
+            <Settings size={18} />
+            Pengaturan Akun
           </Link>
         </nav>
         

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function GET(req: NextRequest) {
   try {
@@ -45,6 +46,16 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = (req as any).ip ?? req.headers.get("x-forwarded-for") ?? "unknown";
+    const rateLimit = checkRateLimit(ip, 3, 60 * 1000); // limit 3 requests per minute per IP
+
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        { error: { message: "Terlalu banyak permintaan, silakan coba lagi nanti.", code: "RATE_LIMITED" } },
+        { status: 429, headers: rateLimit.headers }
+      );
+    }
+
     const body = await req.json();
 
     const deskripsi = body.deskripsi || body.pesan;

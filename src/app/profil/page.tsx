@@ -2,6 +2,7 @@ import Image from "next/image";
 import { MapPin, Users, Map, Target, Flag } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import ProfileMapWrapper from "@/components/profil/ProfileMapWrapper";
+import ExpandableHtml from "@/components/ui/ExpandableHtml";
 
 async function loadVillageProfile() {
   try {
@@ -195,9 +196,10 @@ export default async function ProfilPage() {
               <div className="space-y-6">
                 <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Sejarah Desa Suka Makmur</h3>
                 {profile?.sejarah ? (
-                  <div 
+                  <ExpandableHtml 
+                    html={profile.sejarah.replace(/&nbsp;/g, ' ')}
                     className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed prose-p:mb-4 last:prose-p:mb-0 break-words"
-                    dangerouslySetInnerHTML={{ __html: profile.sejarah.replace(/&nbsp;/g, ' ') }}
+                    maxHeight="384px"
                   />
                 ) : (
                   <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">

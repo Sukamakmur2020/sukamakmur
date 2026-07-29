@@ -122,29 +122,19 @@ export default async function Home() {
         />
         
         <div className="relative z-20 max-w-4xl flex flex-col items-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <div className="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-sm font-medium">
-            Selamat Datang di
+          <div className="flex items-center gap-4 mb-2">
+            <div className="h-[1px] w-8 md:w-12 bg-white/50" />
+            <span className="text-white/90 text-sm md:text-base font-medium tracking-[0.2em] uppercase">
+              Selamat Datang di
+            </span>
+            <div className="h-[1px] w-8 md:w-12 bg-white/50" />
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/60 tracking-tighter leading-[1.1] pb-2 filter drop-shadow-lg">
             Desa Suka Makmur
           </h1>
-          <p className="text-lg md:text-xl text-slate-200 max-w-2xl font-light">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl font-light leading-relaxed tracking-wide drop-shadow-md">
             Mewujudkan tata kelola desa yang transparan, inovatif, dan responsif. Memadukan kearifan lokal dengan inovasi berkelanjutan.
           </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-4">
-            <Link 
-              href="/#profile"
-              className="px-8 py-4 rounded-full bg-primary text-white font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
-            >
-              Kenali Kami Lebih Dekat
-            </Link>
-            <Link 
-              href="/#ppid"
-              className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20 font-medium hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
-            >
-              Layanan Informasi Publik
-            </Link>
-          </div>
         </div>
 
         <a 

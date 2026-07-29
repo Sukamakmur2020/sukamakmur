@@ -20,10 +20,10 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={cn("h-full scroll-smooth", "antialiased")}
+      className={cn("h-full scroll-smooth overflow-x-hidden", "antialiased")}
       data-scroll-behavior="smooth"
     >
-      <body className="min-h-full flex flex-col font-sans selection:bg-primary/20 selection:text-primary relative">
+      <body className="min-h-full flex flex-col font-sans selection:bg-primary/20 selection:text-primary relative overflow-x-hidden">
         <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
           <div className="relative w-[80vw] h-[80vw] max-w-[500px] max-h-[500px] opacity-[0.65] dark:opacity-[0.25]">
             <Image

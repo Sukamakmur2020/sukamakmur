@@ -60,10 +60,10 @@ export default async function KatalogDetailPage({ params }: Props) {
 
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-24 pb-24">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-20 md:pt-24 pb-16 md:pb-24">
       {/* Hero Header */}
       <div className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-        <div className="container mx-auto max-w-5xl px-4 py-8">
+        <div className="container mx-auto max-w-5xl px-4 py-6 md:py-8">
           <Link 
             href="/katalog" 
             className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors mb-6"
@@ -76,7 +76,7 @@ export default async function KatalogDetailPage({ params }: Props) {
               <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full uppercase tracking-wider mb-3">
                 {item.category.nama}
               </div>
-              <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight mb-2">
+              <h1 className="text-2xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight mb-2">
                 {item.nama}
               </h1>
               {item.dusun && (
@@ -86,13 +86,13 @@ export default async function KatalogDetailPage({ params }: Props) {
                 </div>
               )}
             </div>
-            <div className="flex gap-3 shrink-0">
+            <div className="flex gap-3 shrink-0 w-full md:w-auto mt-4 md:mt-0">
               {item.kontak && (
                 <a 
                   href={`https://wa.me/${item.kontak.replace(/\D/g,'')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold transition-colors shadow-lg shadow-green-500/20"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold transition-colors shadow-lg shadow-green-500/20 w-full md:w-auto"
                 >
                   <Phone size={18} /> Hubungi
                 </a>
@@ -102,11 +102,11 @@ export default async function KatalogDetailPage({ params }: Props) {
         </div>
       </div>
 
-      <div className="container mx-auto max-w-5xl px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="container mx-auto max-w-5xl px-4 py-8 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
           
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-10">
+          <div className="lg:col-span-2 space-y-8 md:space-y-10">
             {/* Main Image */}
             <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden relative shadow-sm">
               {item.fotoUrl ? (
@@ -126,11 +126,11 @@ export default async function KatalogDetailPage({ params }: Props) {
             </div>
 
             {/* Description Section */}
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-10 border border-slate-200 dark:border-slate-800 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl p-6 md:p-10 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-4 md:mb-6 flex items-center gap-2">
                 <FileText size={20} className="text-primary" /> Deskripsi
               </h3>
-              <div className="prose prose-slate dark:prose-invert prose-lg max-w-none text-slate-600 dark:text-slate-300 leading-relaxed">
+              <div className="prose prose-slate dark:prose-invert md:prose-lg max-w-none text-slate-600 dark:text-slate-300 leading-relaxed break-words overflow-hidden w-full">
                 <div dangerouslySetInnerHTML={{ __html: item.deskripsi }} />
               </div>
             </div>
@@ -139,7 +139,7 @@ export default async function KatalogDetailPage({ params }: Props) {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Info Card */}
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
               <h3 className="font-bold text-slate-900 dark:text-white pb-4 border-b border-slate-100 dark:border-slate-800">Informasi Tambahan</h3>
               
               <div className="space-y-4">
@@ -170,7 +170,7 @@ export default async function KatalogDetailPage({ params }: Props) {
             </div>
 
             {/* Map Mini */}
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
               <h3 className="font-bold text-slate-900 dark:text-white">Lokasi</h3>
               <div className="w-full h-48 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 relative z-0">
                 <MapWrapper items={[item]} />

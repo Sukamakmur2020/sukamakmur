@@ -37,13 +37,13 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-800">
+    <footer className="bg-slate-950 text-slate-300 pt-12 md:pt-16 pb-8 border-t border-slate-800">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-12 mb-8 md:mb-12">
 
           {/* Column 1: Info (Always visible) */}
-          <div className="space-y-6 mb-8 md:mb-0 flex flex-col items-center text-center">
-            <div className="flex items-center gap-3 justify-center">
+          <div className="space-y-6 md:mb-0 flex flex-col md:items-center md:text-center pb-4 md:pb-0">
+            <div className="flex items-center gap-3 md:justify-center">
               <div className="relative w-12 h-14 drop-shadow-sm">
                 <Image
                   src="/deliSerdang.png"
@@ -58,7 +58,7 @@ export function Footer() {
                 <p className="text-sm text-slate-400">Kab. Deli Serdang</p>
               </div>
             </div>
-            <div className="text-sm space-y-2 leading-relaxed flex flex-col items-center">
+            <div className="text-sm space-y-2 leading-relaxed flex flex-col md:items-center">
               <p className="flex items-start gap-2 text-left max-w-xs">
                 <MapPin size={16} className="text-primary shrink-0 mt-1" />
                 <span>Jl. Aman No. 3 F Dusun III<br />Desa Suka Makmur, Kec. Deli Tua<br />Kab. Deli Serdang<br />Sumatera Utara, 20355</span>
@@ -68,7 +68,7 @@ export function Footer() {
           </div>
 
           {/* Column 2: Contact */}
-          <div className="border-t border-slate-800 md:border-none pt-4 md:pt-0 flex flex-col items-center">
+          <div className="border-t border-slate-800 md:border-none py-4 md:py-0 flex flex-col md:items-center">
             <button
               onClick={() => toggleSection('contact')}
               className="w-full flex items-center justify-between md:justify-center md:cursor-default md:pointer-events-none group"
@@ -85,8 +85,8 @@ export function Footer() {
               "w-full md:block overflow-hidden transition-all duration-300",
               openSection === 'contact' ? "max-h-[500px] opacity-100 mt-6" : "max-h-0 opacity-0 md:max-h-[500px] md:opacity-100 md:mt-0"
             )}>
-              <div className="space-y-4 text-sm pb-4 md:pb-0 flex flex-col items-center">
-                <div className="flex flex-col gap-4 w-full max-w-[260px]">
+              <div className="space-y-4 text-sm pb-4 md:pb-0 flex flex-col md:items-center">
+                <div className="flex flex-col gap-4 w-full max-w-[260px] pt-2 md:pt-0">
                   <a href="tel:083895253723" className="flex items-center gap-3 hover:text-white transition-colors group">
                     <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-primary transition-colors shrink-0">
                       <Phone size={14} className="text-slate-300 group-hover:text-white" />
@@ -119,7 +119,7 @@ export function Footer() {
           </div>
 
           {/* Column 3: Masukan / Feedback */}
-          <div className="border-t border-slate-800 md:border-none pt-4 md:pt-0 flex flex-col items-center">
+          <div className="border-t border-slate-800 md:border-none py-4 md:py-0 flex flex-col md:items-center">
             <button
               onClick={() => toggleSection('masukan')}
               className="w-full flex items-center justify-between md:justify-center md:cursor-default md:pointer-events-none group"
@@ -136,8 +136,8 @@ export function Footer() {
               "w-full md:block overflow-hidden transition-all duration-300",
               openSection === 'masukan' ? "max-h-[500px] opacity-100 mt-6" : "max-h-0 opacity-0 md:max-h-[500px] md:opacity-100 md:mt-0"
             )}>
-              <div className="space-y-4 pb-4 md:pb-0 flex flex-col items-center text-center">
-                <p className="text-sm text-slate-400 max-w-sm">Punya saran atau keluhan? Sampaikan kepada kami untuk Desa Suka Makmur yang lebih baik.</p>
+              <div className="space-y-4 pb-4 md:pb-0 flex flex-col md:items-center md:text-center">
+                <p className="text-sm text-slate-400 max-w-sm pt-2 md:pt-0 text-left md:text-center">Punya saran atau keluhan? Sampaikan kepada kami untuk Desa Suka Makmur yang lebih baik.</p>
                 <form className="flex flex-col gap-3 w-full max-w-sm" onSubmit={async (e) => {
                   e.preventDefault();
                   if (!pesanMasukan.trim()) {
@@ -208,7 +208,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-800 text-sm flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500">
+        <div className="pt-8 border-t border-slate-800 text-xs md:text-sm flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-center md:text-left">
           <p>© 2026 Powered by KKN Universitas Negeri Medan Kelompok 1</p>
           <p>Desa Suka Makmur, Berkarya & Berinovasi</p>
         </div>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export async function GET(
   _req: NextRequest,
@@ -59,6 +60,10 @@ export async function PUT(
       },
     });
 
+    revalidatePath("/berita");
+    revalidatePath(`/berita/${slug}`);
+    revalidatePath("/");
+
     return NextResponse.json({
       data: { ...news, tanggal_publikasi: news.tanggal_publikasi.toISOString() },
       meta: { total: 1 },
@@ -80,6 +85,10 @@ export async function DELETE(
     const { slug } = await params;
 
     await prisma.news.delete({ where: { slug } });
+
+    revalidatePath("/berita");
+    revalidatePath(`/berita/${slug}`);
+    revalidatePath("/");
 
     return NextResponse.json({ data: { success: true }, meta: { total: 0 } });
   } catch (error) {
